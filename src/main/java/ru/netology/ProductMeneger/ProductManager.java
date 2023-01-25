@@ -1,4 +1,6 @@
+package ru.netology.ProductMeneger;
 public class ProductManager {
+
     private ProductRepository repo;
 
     public ProductManager(ProductRepository repo) {
@@ -6,7 +8,7 @@ public class ProductManager {
     }
 
     public void add(Product product) {
-        repo.save(product);
+        repo.add(product);
     }
 
     public Product[] searchBy(String text) {
@@ -14,7 +16,14 @@ public class ProductManager {
         for (Product product : repo.findAll()) {
             if (matches(product, text)) {
                 // "добавляем в конец" массива result продукт product
+                Product[] tmp = new Product[result.length +1];
+                for (int i = 0; i < result.length; i++) {
+                    tmp[i] = result[i];
+                }
+                tmp[tmp.length - 1] = product;
+                result = tmp;
             }
+
         }
         return result;
     }
