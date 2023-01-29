@@ -67,4 +67,31 @@ class ProductRepositoryTest {
 
     }
 
+    @Test
+    public void removeByIncorrectId() {
+        ProductRepository repository = new ProductRepository();
+
+
+        Book book1 = new Book(1, "Hot air balloon trip", 200, " Jules Verne");
+        Book book2 = new Book(2, "2000 Leagues Under the Sea", 300, "Jules Verne");
+        Book book3 = new Book(3, "Robinson Crusoe", 400, "D. Defoe");
+
+        Smartphone smartphone1 = new Smartphone(11, "Honor", 3000, "Honor Co");
+        Smartphone smartphone2 = new Smartphone(12, "Samsung", 400, "Samsung Co");
+        Smartphone smartphone3 = new Smartphone(13, "IPhone", 500, "Apple Co");
+        Smartphone smartphone4 = new Smartphone(16, "Honor", 2000, "Honor Co");
+
+        repository.add(book1);
+        repository.add(book2);
+        repository.add(book3);
+
+        repository.add(smartphone1);
+        repository.add(smartphone2);
+        repository.add(smartphone3);
+        repository.add(smartphone4);
+
+        Assertions.assertThrows(NotFoundException.class,
+                () -> repository.RemoveById(17)
+        );
+    }
 }
